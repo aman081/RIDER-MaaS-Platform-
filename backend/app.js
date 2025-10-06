@@ -5,6 +5,7 @@ const cors=require('cors');
 const app=express();
 const DB_CONNECT=require('../backend/db/db');
 const userRouter=require('./routes/user.routes');
+const captainRouter=require('./routes/captain.routes');
 const cookieParser=require('cookie-parser');
 
 
@@ -22,5 +23,6 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/user',userRouter);
+app.use('/captain',captainRouter);
 
 module.exports=app;
