@@ -10,7 +10,7 @@ import UserProtectWrapper from './pages/UserProtectWrapper';
 import CaptainProtectWrapper from './pages/CaptainProtectWrapper';
 import UserLogout from './pages/UserLogout';
 import CaptainLogout from './pages/CaptainLogout';
-import CaptainHome from './pages/captainHome';
+import CaptainHome from './pages/CaptainHome';
 import Riding from './pages/Riding';
 import CaptainRiding from './pages/CaptainRiding';
 import ConfirmRidePopUp from './components/ConfirmRidePopUp';
