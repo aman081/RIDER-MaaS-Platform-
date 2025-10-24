@@ -158,7 +158,7 @@ const CaptainHome = () => {
     return (
         <div className='h-screen relative overflow-hidden'> {/* Added overflow-hidden */}
             <div className='fixed p-6 top-0 flex items-center justify-between w-screen z-20'> {/* Added z-index */}
-                <img className='w-16' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber Logo" />
+                <img className='w-16' src="https://imgs.search.brave.com/yjzGFf2Us28osYOCiZ6SYSGUGswyR6tspkw91KDlljw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvMjIvQ2Fy/LUxvZ28tUE5HLVBp/Yy5wbmc" alt="Logo" />
                 <Link to='/CaptainLogin' className='h-10 w-10 bg-white flex items-center justify-center rounded-full shadow-md'> {/* Added shadow */}
                     <i className="text-lg font-medium ri-logout-box-r-line"></i>
                 </Link>

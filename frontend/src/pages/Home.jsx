@@ -133,41 +133,80 @@ const Home = () => {
         }
     }, [vehiclePanel])
 
-    useGSAP(function () {
-        if (confirmRidePanel) {
-            gsap.to(confirmRidePanelRef.current, {
-                transform: 'translateY(0)'
-            })
-        } else {
-            gsap.to(confirmRidePanelRef.current, {
-                transform: 'translateY(100%)'
-            })
-        }
-    }, [confirmRidePanel])
+   useGSAP(() => {
+    const targetElement = confirmRidePanelRef.current;
+    if (!targetElement) return;
 
-    useGSAP(function () {
-        if (vehicleFound) {
-            gsap.to(vehicleFoundRef.current, {
-                transform: 'translateY(0)'
-            })
-        } else {
-            gsap.to(vehicleFoundRef.current, {
-                transform: 'translateY(100%)'
-            })
-        }
-    }, [vehicleFound])
+    if (confirmRidePanel) {
+        gsap.set(targetElement, { visibility: 'visible' });
+        gsap.to(targetElement, {
+            transform: 'translateY(0%)',
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.out'
+        });
+    } else {
+        gsap.to(targetElement, {
+            transform: 'translateY(100%)',
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.in',
+            onComplete: () => {
+                gsap.set(targetElement, { visibility: 'hidden' });
+            }
+        });
+    }
+}, [confirmRidePanel]);
 
-    useGSAP(function () {
-        if (waitingForDriver) {
-            gsap.to(waitingForDriverRef.current, {
-                transform: 'translateY(0)'
-            })
-        } else {
-            gsap.to(waitingForDriverRef.current, {
-                transform: 'translateY(100%)'
-            })
-        }
-    }, [waitingForDriver])
+useGSAP(() => {
+    const targetElement = vehicleFoundRef.current;
+    if (!targetElement) return;
+
+    if (vehicleFound) {
+        gsap.set(targetElement, { visibility: 'visible' });
+        gsap.to(targetElement, {
+            transform: 'translateY(0%)',
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.out'
+        });
+    } else {
+        gsap.to(targetElement, {
+            transform: 'translateY(100%)',
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.in',
+            onComplete: () => {
+                gsap.set(targetElement, { visibility: 'hidden' });
+            }
+        });
+    }
+}, [vehicleFound]);
+
+useGSAP(() => {
+    const targetElement = waitingForDriverRef.current;
+    if (!targetElement) return;
+
+    if (waitingForDriver) {
+        gsap.set(targetElement, { visibility: 'visible' });
+        gsap.to(targetElement, {
+            transform: 'translateY(0%)',
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.out'
+        });
+    } else {
+        gsap.to(targetElement, {
+            transform: 'translateY(100%)',
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.in',
+            onComplete: () => {
+                gsap.set(targetElement, { visibility: 'hidden' });
+            }
+        });
+    }
+}, [waitingForDriver]);
 
 
     async function findTrip() {
@@ -203,7 +242,7 @@ const Home = () => {
 
     return (
         <div className='h-screen relative overflow-hidden'>
-            <img className='w-16 absolute left-5 top-5' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
+            <img className='w-16 absolute left-5 top-5' src="https://imgs.search.brave.com/yjzGFf2Us28osYOCiZ6SYSGUGswyR6tspkw91KDlljw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvMjIvQ2Fy/LUxvZ28tUE5HLVBp/Yy5wbmc" alt="" />
             <div className='h-screen w-screen'>
                 {/* image for temporary use  */}
                 <LiveTracking
@@ -268,7 +307,7 @@ const Home = () => {
                     selectVehicle={setVehicleType}
                     fare={fare} setConfirmRidePanel={setConfirmRidePanel} selectVehicleImage={setSelectedVehicleImage} setVehiclePanel={setVehiclePanel} />
             </div>
-            <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
+            <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full opacity-0 invisible bg-white px-3 py-6 pt-12'>
                 <ConfirmRide
                     createRide={createRide}
                     pickup={pickup}
@@ -278,7 +317,7 @@ const Home = () => {
                     vehicleImage={selectedVehicleImage}
                     setConfirmRidePanel={setConfirmRidePanel} setVehicleFound={setVehicleFound} />
             </div>
-            <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
+            <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full opacity-0 invisible bg-white px-3 py-6 pt-12'>
                 <LookingForDriver
                     createRide={createRide}
                     pickup={pickup}
@@ -288,7 +327,7 @@ const Home = () => {
                     vehicleImage={selectedVehicleImage}
                     setVehicleFound={setVehicleFound} />
             </div>
-            <div ref={waitingForDriverRef} className='fixed w-full  z-10 bottom-0  bg-white px-3 py-6 pt-12'>
+            <div ref={waitingForDriverRef} className='fixed w-full  z-10 bottom-0 translate-y-full opacity-0 invisible bg-white px-3 py-6 pt-12'>
                 <WaitingForDriver
                     ride={ride}
                     setVehicleFound={setVehicleFound}
