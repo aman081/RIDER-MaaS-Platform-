@@ -6,10 +6,11 @@ let io;
 
 function initializeSocket(server) {
     io = socketIo(server, {
-        cors: {
-            origin: '*',
-            methods: [ 'GET', 'POST' ]
-        }
+        cors:{
+        origin: process.env.FRONTEND_URL, // This must match the allowed domain
+        methods: ['GET', 'POST'],
+        credentials: true
+    }
     });
 
     io.on('connection', (socket) => {
