@@ -25,8 +25,8 @@ const Riding = () => {
                 <LiveTracking 
                     ownRole="user"
                     otherPartyLocation={{
-                        latitude: ride?.captain.currentLocation.latitude,
-                        longitude: ride?.captain.currentLocation.longitude
+                        latitude: ride?.captain?.location?.coordinates?.[0],
+                        longitude: ride?.captain?.location?.coordinates?.[1],
                     }}
                 />
 
