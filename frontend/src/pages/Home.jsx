@@ -213,7 +213,7 @@ useGSAP(() => {
         setVehiclePanel(true)
         setPanelOpen(false)
 
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/ride/get-fare`, {
+        const response = await axios.get(`https://${import.meta.env.VITE_BASE_URL}/ride/get-fare`, {
             params: { pickup, destination },
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -227,7 +227,7 @@ useGSAP(() => {
     }
 
     async function createRide() {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/ride/create`, {
+        const response = await axios.post(`https://${import.meta.env.VITE_BASE_URL}/ride/create`, {
             pickup,
             destination,
             vehicleType
