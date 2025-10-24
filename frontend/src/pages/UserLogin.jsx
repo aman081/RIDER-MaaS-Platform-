@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { UserDataContext } from '../context/UserContext.jsx';
+import axios from 'axios';
 
 
 const UserLogin = () => {
@@ -10,6 +12,8 @@ const UserLogin = () => {
 
   
   const navigate = useNavigate()
+  const {user,setUser}= useContext(UserDataContext);
+
 
 
 
@@ -22,7 +26,13 @@ const UserLogin = () => {
     }
 
 
-
+    const response=await axios.post(`http://${import.meta.env.VITE_API_URL}/user/login`,userData);
+     if(response.status===200){
+      const data=response.data;
+      setUser(data.user);
+      localStorage.setItem('token',data.token);
+      navigate('/home');
+     }
 
     setEmail('')
     setPassword('')

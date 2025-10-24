@@ -1,28 +1,35 @@
-const dotenv=require('dotenv');
+const dotenv = require('dotenv');
 dotenv.config();
-const express=require('express');
-const cors=require('cors');
-const app=express();
-const DB_CONNECT=require('../backend/db/db');
-const userRouter=require('./routes/user.routes');
-const captainRouter=require('./routes/captain.routes');
-const cookieParser=require('cookie-parser');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const cookieParser = require('cookie-parser');
+const connectToDb = require('./db/db');
+const userRoutes = require('./routes/user.routes');
+const captainRoutes = require('./routes/captain.routes');
+const mapsRoutes = require('./routes/maps.routes');
+const rideRoutes = require('./routes/ride.routes');
 
-
-DB_CONNECT();
+connectToDb();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-app.get('/',(req,res)=>{
-  res.send('Hello World');
 
-})
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
 
-app.use('/user',userRouter);
-app.use('/captain',captainRouter);
+app.use('/user', userRoutes);
+app.use('/captain', captainRoutes);
+app.use('/maps', mapsRoutes);
+app.use('/ride', rideRoutes);
 
-module.exports=app;
+
+
+
+module.exports = app;
+

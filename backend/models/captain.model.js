@@ -52,14 +52,19 @@ const captainSchema=new mongoose.Schema({
         enum:['car','bike','auto']
         }
     },          
-    location:{
-        lattitude:{
-            type:Number,
-        },
-        longitude:{
-            type:Number,
-        }
+location: {
+    type: {
+        type: String,
+        enum: ['Point'],
+        default: 'Point' // Always a Point for consistency
+    },
+    coordinates: {
+        type: [Number], // [longitude, latitude]
+        default: [0, 0] // Placeholder before first login update
     }
+}
+
+
 });
 
 captainSchema.methods.generateToken=function(){
@@ -74,6 +79,10 @@ captainSchema.methods.comparePassword=async function(password){
 captainSchema.statics.hashPassword=async function(password){
     return await bcrypt.hash(password,10);
 }
-const CaptainModel =mongoose.model('CaptainModel',captainSchema);
+
+captainSchema.index({ location: '2dsphere' });
+// Or just captainSchema.index({ location: '2d' }); might work depending on Mongoose/MongoDB version
+
+const CaptainModel = mongoose.model('CaptainModel', captainSchema);
 
 module.exports=CaptainModel;

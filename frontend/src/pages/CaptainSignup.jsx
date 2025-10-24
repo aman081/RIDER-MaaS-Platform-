@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CaptainDataContext } from '../context/CaptainContext'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 
 
@@ -15,6 +18,9 @@ const CaptainSignup = () => {
   const [ vehiclePlate, setVehiclePlate ] = useState('')
   const [ vehicleCapacity, setVehicleCapacity ] = useState('')
   const [ vehicleType, setVehicleType ] = useState('')
+
+  const {captain,setCaptain}= React.useContext(CaptainDataContext);
+  const navigate=useNavigate();
 
 
 
@@ -32,10 +38,19 @@ const CaptainSignup = () => {
         color: vehicleColor,
         plate: vehiclePlate,
         capacity: vehicleCapacity,
-        vehicleType: vehicleType
+        Vehicletype: vehicleType
       }
     }
 
+     const response=await axios.post(`http://${import.meta.env.VITE_API_URL}/captain/register`,captainData);
+     if(response.status===201){
+      const data=response.data;
+      setCaptain(data.captain);
+
+      localStorage.setItem('token',data.token);
+      navigate('/CaptainHome');
+     }
+   
 
     setEmail('')
     setFirstName('')
@@ -150,7 +165,7 @@ const CaptainSignup = () => {
               <option value="" disabled>Select Vehicle Type</option>
               <option value="car">Car</option>
               <option value="auto">Auto</option>
-              <option value="moto">Moto</option>
+              <option value="bike">Bike</option>
             </select>
           </div>
 
