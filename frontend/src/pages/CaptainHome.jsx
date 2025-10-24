@@ -98,7 +98,7 @@ const CaptainHome = () => {
             if (rideData.pickup) {
                 try {
                     const token = localStorage.getItem('token');
-                    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-coordinates`, {
+                    const response = await axios.get(`https://${import.meta.env.VITE_BASE_URL}/maps/get-coordinates`, {
                         params: { address: rideData.pickup },
                         headers: { Authorization: `Bearer ${token}` }
                     });
@@ -123,7 +123,7 @@ const CaptainHome = () => {
         // ... (confirmRide function remains the same) ...
         try {
             console.log(ride)
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/ride/confirm`, {
+            const response = await axios.post(`https://${import.meta.env.VITE_BASE_URL}/ride/confirm`, {
                 rideId: ride._id,
                 // captainId: captain._id, // Backend gets captain from auth middleware
             }, {

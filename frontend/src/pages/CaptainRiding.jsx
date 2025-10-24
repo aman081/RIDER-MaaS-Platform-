@@ -27,7 +27,7 @@ const CaptainRiding = () => {
                 try {
                     const token = localStorage.getItem('token');
                     // Fetch coordinates using the pickup address string
-                    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-coordinates`, {
+                    const response = await axios.get(`https://${import.meta.env.VITE_BASE_URL}/maps/get-coordinates`, {
                         params: { address: rideData.pickup },
                         headers: { Authorization: `Bearer ${token}` }
                     });

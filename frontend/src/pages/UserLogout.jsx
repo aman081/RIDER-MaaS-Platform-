@@ -15,7 +15,7 @@ const UserLogout = () => {
             try {
                 // 5. Only call the backend if a token actually exists
                 if (token) {
-                    await axios.post(`http://${import.meta.env.VITE_API_URL}/user/logout`, {
+                    await axios.post(`https://${import.meta.env.VITE_API_URL}/user/logout`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }

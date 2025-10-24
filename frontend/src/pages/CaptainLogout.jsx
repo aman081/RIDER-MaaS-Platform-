@@ -16,7 +16,7 @@ const CaptainLogout = () => {
                 // 5. Only call the backend if a token actually exists
                 if (token) {
                     // 6. Use the CAPTAIN logout endpoint
-                    await axios.post(`http://${import.meta.env.VITE_API_URL}/captain/logout`, 
+                    await axios.post(`https://${import.meta.env.VITE_API_URL}/captain/logout`, 
                     null, // Send null as the body
                     {
                         headers: {

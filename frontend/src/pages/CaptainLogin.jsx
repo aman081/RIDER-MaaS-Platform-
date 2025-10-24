@@ -21,7 +21,7 @@ const CaptainLogin = () => {
       password
     }
 
-    const response=await axios.post(`http://${import.meta.env.VITE_API_URL}/captain/login`,captain);
+    const response=await axios.post(`https://${import.meta.env.VITE_API_URL}/captain/login`,captain);
     if(response.status===200){
       const data=response.data;
       setCaptain(data.captain);

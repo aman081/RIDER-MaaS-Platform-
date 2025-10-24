@@ -16,7 +16,7 @@ const ConfirmRidePopUp = (props) => {
 
     try { // <-- Add try
         const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/ride/start-ride`,
+            `https://${import.meta.env.VITE_BASE_URL}/ride/start-ride`,
             {
                 params: {
                     rideId: props.ride._id,

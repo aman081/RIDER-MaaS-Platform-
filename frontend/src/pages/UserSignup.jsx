@@ -32,7 +32,7 @@ const UserSignup = () => {
     }
 
 
-      const response=await axios.post(`http://${import.meta.env.VITE_API_URL}/user/register`,newUser);
+      const response=await axios.post(`https://${import.meta.env.VITE_API_URL}/user/register`,newUser);
      if(response.status===201){
       const data=response.data;
       setUser(data.user);

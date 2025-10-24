@@ -42,7 +42,7 @@ const CaptainSignup = () => {
       }
     }
 
-     const response=await axios.post(`http://${import.meta.env.VITE_API_URL}/captain/register`,captainData);
+     const response=await axios.post(`https://${import.meta.env.VITE_API_URL}/captain/register`,captainData);
      if(response.status===201){
       const data=response.data;
       setCaptain(data.captain);
